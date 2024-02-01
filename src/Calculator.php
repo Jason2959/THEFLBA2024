@@ -1,9 +1,8 @@
 <!DOCTYPE=html>
 	<html>
 	<meta charset=" UTF-8" />
+	<link rel="icon" type="image/x-icon" href="./Images/favicon.ico">
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
-
-	<link rel="stylesheet" href="main.css" />
 	<link rel="stylesheet" href="Stylation.css" />
 	<div class="container-fluid">
 
@@ -11,9 +10,9 @@
 
 		<body>
 			<div class="topnav">
-				<a href="index.html">Home</a>
+				<a href="index.html">About</a>
 				<a class="active" href="Calculator.html">Calculator</a>
-				<a href="FAQ.html">FAQ</a>
+				<a href="CodeView.html">View Code</a>
 			</div>
 		</body>
 		</head>
@@ -23,11 +22,14 @@
 				<h1>GPA Calculator</h1>
 				<p>
 				<h3>How to use the GPA calculator:</h3>
-					<ol type="1">
-					  <li>Type in your class name, the scale the class is weighed on (For an unweighed GPA set this equal to 4.0), and the final grads you finished with.</li>
-					    <li>If more classes are needed press the teal button and if you added too many classes proceed to press the pink, subtract button to remove that field</li>
-						  <li>Finally, after carefully reviewing all classes press the submit button and your GPA will be calculated.</li>
-						  </ol>
+				<ol type="1">
+					<li>Type in your class name, the scale the class is weighed on (for an unweighed GPA set this equal
+						to 4.0), and the final grades you finished with.</li>
+					<li>If more classes are needed press the teal button and if you added too many classes proceed to
+						press the pink, subtract button to remove that field</li>
+					<li>Finally, after carefully reviewing all classes press the submit button and your GPA will be
+						calculated.</li>
+				</ol>
 				</p>
 				<h2>Add Your Classes:</h2>
 				<div class="AllClassTextBox">
@@ -58,8 +60,76 @@
 					const myForm = document.getElementById("InfoList");
 					let fieldCounter = 2;
 
+					// Function to set a cookie
+					function setCookie(name, value, days) {
+						const expires = new Date();
+						expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+						document.cookie = name + '=' + value + ';expires=' + expires.toUTCString();
+					}
+
+					// Function to get a cookie value
+					function getCookie(name) {
+						const keyValue = document.cookie.match('(^|;) ?' + name + '=([^;]*)(;|$)');
+						return keyValue ? keyValue[2] : null;
+					}
+
+					// Function to load data from cookies and recreate fields
+					function loadAndRecreateFields() {
+						const savedData = getCookie('gpaFormData');
+						if (savedData) {
+							const formData = JSON.parse(savedData);
+
+							// Recreate the initial field
+							document.getElementById('ClassName1').value = formData.ClassName[0];
+							document.getElementById('ClassWeight1').value = formData.ClassWeight[0];
+							document.getElementById('FinalGrade1').value = formData.FinalGrade[0];
+
+							// Recreate additional fields
+							for (let i = 1; i < formData.ClassName.length; i++) {
+								RemakeFields(); // Call RemakeFields without an event argument
+								const currentFieldCounter = fieldCounter - 1; // Field was already incremented in RemakeFields
+								document.getElementById('ClassName' + currentFieldCounter).value = formData.ClassName[i];
+								document.getElementById('ClassWeight' + currentFieldCounter).value = formData.ClassWeight[i];
+								document.getElementById('FinalGrade' + currentFieldCounter).value = formData.FinalGrade[i];
+							}
+						}
+					}
+
+					// Load and recreate fields when the page is loaded
+					window.addEventListener('load', loadAndRecreateFields);
+
+					// Function to save form data to cookies
+					function saveFormDataToCookie() {
+						const formData = {
+							ClassName: [],
+							ClassWeight: [],
+							FinalGrade: []
+						};
+
+						const classNames = document.getElementsByName("ClassName[]");
+						const classWeights = document.getElementsByName("ClassWeight[]");
+						const finalGrades = document.getElementsByName("FinalGrade[]");
+
+
+						for (let i = 0; i < classNames.length; i++) {
+							const className = classNames[i].value || '';
+							const classWeight = classWeights[i] ? classWeights[i].value : '';
+							const finalGrade = finalGrades[i] ? finalGrades[i].value : '';
+
+							formData.ClassName.push(className);
+							formData.ClassWeight.push(classWeight);
+							formData.FinalGrade.push(finalGrade);
+						}
+
+						setCookie('gpaFormData', JSON.stringify(formData), 7);
+					}
+
+
 					function RemakeFields(event) {
-						event.preventDefault();
+						if (event) {
+							event.preventDefault();
+						}
+
 						// Create elements
 						const nef_wrapper = document.createElement("div");
 
@@ -78,50 +148,50 @@
 						// Add Class to main wrapper
 						nef_wrapper.classList.add("input__w");
 
-						//Add the name label
-						NameLabel.for = "Classname";
+						// Add the name label
+						NameLabel.htmlFor = "Classname";
 						NameLabel.innerText = " Class Name: ";
 
-						//Add the class weight label
-						WeightLabel.for = "ClassWeight";
+						// Add the class weight label
+						WeightLabel.htmlFor = "ClassWeight";
 						WeightLabel.innerText = " Class Weight: ";
 
-						//Add final grade label
-						GradeLabel.for = "FinalGrade";
+						// Add final grade label
+						GradeLabel.htmlFor = "FinalGrade";
 						GradeLabel.innerText = " Final Grade: ";
-						//
-						//
-						//
-						// set Input field
+
+						// Set Input fields
+						const currentFieldCounter = fieldCounter; // Store current field counter value
 						NameInput.type = "text";
 						NameInput.name = "ClassName[]";
-						NameInput.id = "ClassName" + fieldCounter;
+						NameInput.id = "ClassName" + currentFieldCounter;
 						NameInput.setAttribute("required", "");
 						NameInput.classList.add("input-field");
 
-						// set Input field
+						// Set Input fields
 						WeightInput.type = "number";
-						WeightInput.name = "ClassWeight[]" + fieldCounter;
-						WeightInput.id = "ClassWeight" + fieldCounter;
+						WeightInput.name = "ClassWeight[]";
+						WeightInput.id = "ClassWeight" + currentFieldCounter;
 						WeightInput.step = "0.1";
 						WeightInput.max = "5";
 						WeightInput.setAttribute("required", "");
 						WeightInput.classList.add("input-field");
 
-						// set Input field
+						// Set Input fields
 						GradeInput.type = "text";
-						GradeInput.name = "FinalGrade[]" + fieldCounter;
-						GradeInput.id = "FinalGrade" + fieldCounter;
+						GradeInput.name = "FinalGrade[]";
+						GradeInput.id = "FinalGrade" + currentFieldCounter;
 						GradeInput.step = "1";
 						GradeInput.max = "110";
 						GradeInput.setAttribute("required", "");
 						GradeInput.classList.add("input-field");
-						// set button DEL
+
+						// Set button DEL
 						btnDel.type = "button";
 						btnDel.classList.add("btn-del-input");
 						btnDel.innerText = "-";
 
-						//append elements to main wrapper
+						// Append elements to main wrapper
 						nef_wrapper.appendChild(NameLabel);
 						nef_wrapper.appendChild(NameInput);
 						nef_wrapper.appendChild(WeightLabel);
@@ -130,18 +200,18 @@
 						nef_wrapper.appendChild(GradeInput);
 						nef_wrapper.appendChild(btnDel);
 
-						// append element to DOM
+						// Append element to DOM
 						myForm.appendChild(nef_wrapper);
 						btnDel.addEventListener("click", removeEmailField);
-						//raise the counter
 						fieldCounter++;
 
 						function removeEmailField(el) {
 							const field = el.target.parentElement;
 							field.remove();
+							saveFormDataToCookie(); // Save data after removing a field
 						}
-
 					}
+
 					function checkAndSubmit() {
 						const myForm = document.getElementById("GPACalculator");
 						const classNames = document.getElementsByName("ClassName[]");
@@ -165,20 +235,12 @@
 									return; // Abort form submission
 								}
 							}
+							saveFormDataToCookie();
 						}
 
 						// If no issues found, submit the form
 						myForm.submit();
 					}
-
-
-
-
-
-
-
-
-
 				</script>
 			</div>
 		</body>

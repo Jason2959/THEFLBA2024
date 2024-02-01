@@ -2,7 +2,7 @@
     <html>
     <meta charset=" UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    	<link rel="icon" type="image/x-icon" href="./Images/favicon.ico">
     <link rel="stylesheet" href="main.css" />
     <link rel="stylesheet" href="Stylation.css" />
     <div class="container-fluid">
@@ -111,7 +111,7 @@
                         //echo "<p>Class Name: " . ($i < count($classNames) ? $classNames[$i] : "") . "</p>";
                         //echo "<p>Class Weight: " . ($i < count($classWeights) ? $classWeights[$i] : "") . "</p>";
                         //echo "<p>Final Grade: " . ($i < count($finalGrades) ? $finalGrades[$i] : "") . "</p>";
-                        echo "<p>Class " . ($i + 1) . ", ". ($i < count($classNames) ? $classNames[$i] : "") . ", is weighed at  ". ($i < count($classWeights) ? $classWeights[$i] : "") . " and had a final grade of ". ($i < count($finalGrades) ? $finalGrades[$i] : "") . ".</p>";
+                        echo "<p> ". ($i < count($classNames) ? $classNames[$i] : "") . ", is weighed at  ". ($i < count($classWeights) ? $classWeights[$i] : "") . " and had a final grade of ". ($i < count($finalGrades) ? $finalGrades[$i] : "") . ".</p>";
                     }
                     echo "<h1>Results</h1>";
                     echo "<p>Final GPA: <strong>" . $finalGPA . "</strong></p>";
