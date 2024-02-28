@@ -1,12 +1,13 @@
 <!DOCTYPE =html>
 <html>
+	<title>GPA Calculator</title>
 	<meta charset=" UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<link rel="icon" type="image/x-icon" href="./Images/favicon.ico" />
-	<link rel="stylesheet" href="main.css" />
 	<link rel="stylesheet" href="Stylation.css" />
 	<div class="container-fluid">
 		<head>
+			<title>GPA Calculator</title>
 			<body>
 				<div class="topnav">
 					<a href="index.html">About</a>
@@ -18,12 +19,23 @@
 		<body>
 			<div class="CalcText">
 				<h1>View Our Code!</h1>
+				<h4>
+					<center>
+						<a
+							href="https://github.com/Jason2959/THEFLBA2024"
+							style="color: aqua"
+							>Our Entire Code</a
+						>
+					</center>
+				</h4>
 				<button class="accordion">Navigation Bar</button>
 				<div class="panel">
 					<pre><code>
 &lt;head&gt;
-  &lt;div class=&quot;topnav&quot;&gt; <nobr style="color: crimson;">Declares that this section is for navagation</nobr>
-    &lt;a href=&quot;index.html&quot;&gt;About&lt;/a&gt; <nobr style="color: crimson;">Links to each section of the page</nobr>
+<nobr style="color: crimson;">Declares that this section is for navagation</nobr>
+  &lt;div class=&quot;topnav&quot;&gt; 
+  <nobr style="color: crimson;">Links to each section of the page</nobr>
+    &lt;a href=&quot;index.html&quot;&gt;About&lt;/a&gt; 
     &lt;a class=&quot;active&quot; href=&quot;Calculator.html&quot;&gt;Calculator&lt;/a&gt;
     &lt;a href=&quot;CodeView.html&quot;&gt;View Code&lt;/a&gt;
   &lt;/div&gt;
@@ -34,13 +46,17 @@
 				<div class="panel">
 					<pre>
                         <code>
-var acc = document.getElementsByClassName(&quot;accordion&quot;);<nobr style="color: crimson;"> finds all the elements on the page that have a class name "accordion" and stores them in a variable. </nobr>
+<nobr style="color: crimson;"> finds all the elements on the page that have a class name "accordion" and stores them in a variable. </nobr>
+var acc = document.getElementsByClassName(&quot;accordion&quot;);
 var i; 
 
 for (i = 0; i &lt; acc.length; i++) {
-  acc[i].addEventListener(&quot;click&quot;, function() { <nobr style="color: crimson;">Checks through all the accordions to see if they are being pressed.</nobr>
-  this.classList.toggle(&quot;active&quot;);<nobr style="color: crimson;"> marks the accordion as active</nobr>
-  var panel = this.nextElementSibling; <nobr style="color: crimson;"> Checks if the part after it is open or closed and reverses it</nobr>
+  <nobr style="color: crimson;">Checks through all the accordions to see if they are being pressed.</nobr>
+  acc[i].addEventListener(&quot;click&quot;, function() { 
+  <nobr style="color: crimson;">marks the accordion as active</nobr>
+  this.classList.toggle(&quot;active&quot;);
+  var panel = this.nextElementSibling;
+  <nobr style="color: crimson;">Checks if the part after it is open or closed and reverses it</nobr>
   if (panel.style.maxHeight) {
     panel.style.maxHeight = null;
   } else {
@@ -53,14 +69,13 @@ for (i = 0; i &lt; acc.length; i++) {
 				</div>
 				<button class="accordion">How buttons are made</button>
 				<div class="panel">
-					<
 					<pre>
                         <code>
 function RemakeFields(event) {
 
     const nef_wrapper = document.createElement(&quot;div&quot;);
-
-    const NameLabel = document.createElement(&quot;label&quot;);<nobr style="color: crimson;">Creates all the parts that will be used in the button.</nobr>
+    <nobr style="color: crimson;">Creates all the parts that will be used in the button.</nobr>
+    const NameLabel = document.createElement(&quot;label&quot;);
     const NameInput = document.createElement(&quot;input&quot;);
 
     const WeightLabel = document.createElement(&quot;Label&quot;);
@@ -71,10 +86,10 @@ function RemakeFields(event) {
 
     const btnAdd = document.createElement(&quot;button&quot;);
     const btnDel = document.createElement(&quot;button&quot;);
-
-    nef_wrapper.classList.add(&quot;input__w&quot;);<nobr style="color: crimson;">This goes around everything to be easily worked with.</nobr>
-
-    NameLabel.htmlFor = &quot;Classname&quot;; <nobr style="color: crimson;">Here we give the labels a usage and a text.</nobr>
+    <nobr style="color: crimson;">This will contain everything so it can be moved all at once.</nobr>
+    nef_wrapper.classList.add(&quot;input__w&quot;);
+    <nobr style="color: crimson;">Here we give the labels a usage and a text.</nobr>
+    NameLabel.htmlFor = &quot;Classname&quot;; 
     NameLabel.innerText = &quot; Class Name: &quot;;
 
     WeightLabel.htmlFor = &quot;ClassWeight&quot;;
@@ -82,9 +97,10 @@ function RemakeFields(event) {
 
     GradeLabel.htmlFor = &quot;FinalGrade&quot;;
     GradeLabel.innerText = &quot; Final Grade: &quot;;
-
-    const currentFieldCounter = fieldCounter;<nobr style="color: crimson;">Since numerous fields are being added we number them.</nobr>
-    NameInput.type = &quot;text&quot;;<nobr style="color: crimson;">Now we give each input its own data</nobr>
+    <nobr style="color: crimson;">Since numerous fields are being added we number them.</nobr>
+    const currentFieldCounter = fieldCounter;
+    <nobr style="color: crimson;">Now we give each input its own data</nobr>
+    NameInput.type = &quot;text&quot;;
     NameInput.name = &quot;ClassName[]&quot;;
     NameInput.id = &quot;ClassName&quot; + currentFieldCounter;
     NameInput.setAttribute(&quot;required&quot;, &quot;&quot;);
@@ -105,26 +121,28 @@ function RemakeFields(event) {
     GradeInput.max = &quot;110&quot;;
     GradeInput.setAttribute(&quot;required&quot;, &quot;&quot;);
     GradeInput.classList.add(&quot;input-field&quot;);
-
-    btnDel.type = &quot;button&quot;; <nobr style="color: crimson;">Adds a delete button.</nobr>
+    <nobr style="color: crimson;">Adds a delete button.</nobr>
+    btnDel.type = &quot;button&quot;; 
     btnDel.classList.add(&quot;btn-del-input&quot;);
     btnDel.innerText = &quot;-&quot;;
-
-    nef_wrapper.appendChild(NameLabel);<nobr style="color: crimson;">Adds all the buttons and labels to the wrapper</nobr>
+    <nobr style="color: crimson;">Adds all the buttons and labels to the wrapper</nobr>
+    nef_wrapper.appendChild(NameLabel);
     nef_wrapper.appendChild(NameInput);
     nef_wrapper.appendChild(WeightLabel);
     nef_wrapper.appendChild(WeightInput);
     nef_wrapper.appendChild(GradeLabel);
     nef_wrapper.appendChild(GradeInput);
     nef_wrapper.appendChild(btnDel);
-
-    myForm.appendChild(nef_wrapper);<nobr style="color: crimson;">Adds the wrapper to the main page</nobr>
-    btnDel.addEventListener(&quot;click&quot;, removeEmailField); <nobr style="color: crimson;">When the delete button is clicked it will remove the wrapper and everything inside it</nobr>
+    <nobr style="color: crimson;">Adds the wrapper to the main page</nobr>
+    myForm.appendChild(nef_wrapper);
+    <nobr style="color: crimson;">When the delete button is clicked it will remove the wrapper and everything inside it</nobr>
+    btnDel.addEventListener(&quot;click&quot;, removeEmailField); 
     fieldCounter++;
     function removeEmailField(el) {
     const field = el.target.parentElement;
     field.remove();
-    saveFormDataToCookie(); <nobr style="color: crimson;">Save the data to be stored</nobr>
+    <nobr style="color: crimson;">Save the data to be loaded next time the page is used</nobr>
+    saveFormDataToCookie(); 
 }
 }
 </code>

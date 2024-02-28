@@ -1,13 +1,14 @@
 <!DOCTYPE=html>
     <html>
+
     <meta charset=" UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    	<link rel="icon" type="image/x-icon" href="./Images/favicon.ico">
-    <link rel="stylesheet" href="main.css" />
+        <link rel="icon" type="image/x-icon" href="./Images/favicon.ico">
     <link rel="stylesheet" href="Stylation.css" />
     <div class="container-fluid">
 
         <head>
+            <title>GPA Calculator</title>
 
         <body>
             <div class="topnav">
@@ -21,7 +22,11 @@
         <body>
             <div class="CalcText">
                 <h1>About Your results:</h1>
-                <p> GPA or grade point average, is the cumulative score of a person's grades throughout their high school years. GPA is calculated by class weight and grade. The class weight is dropped down by 1 point for every 10 points the final is missing from a 100. After summating all the classes after taking into account the grade and weights you will then divide by the total amount of classes to get your grade point average. </p>
+                <p> GPA or grade point average, is the cumulative score of a person's grades throughout their high
+                    school years. GPA is calculated by class weight and grade. The class weight is dropped down by 1
+                    point for every 10 points the final is missing from a 100. After summating all the classes after
+                    taking into account the grade and weights you will then divide by the total amount of classes to get
+                    your grade point average. </p>
                 <?php
 
                 function calculateGPA($classNames, $classWeights, $finalGrades)
@@ -104,18 +109,18 @@
 
                     // Determine the maximum number of entries
                     $maxEntries = max(count($classNames), count($classWeights), count($finalGrades));
-
+                    echo "<ol>";
                     // Display all submitted fields (loop through the maximum number of entries)
-                    for ($i = 0; $i < $maxEntries; $i++) {
+                    for ($i = 0; $i  < $maxEntries; $i++) {  
                         //echo "<p>Class " . ($i + 1) . ":</p>";
                         //echo "<p>Class Name: " . ($i < count($classNames) ? $classNames[$i] : "") . "</p>";
                         //echo "<p>Class Weight: " . ($i < count($classWeights) ? $classWeights[$i] : "") . "</p>";
                         //echo "<p>Final Grade: " . ($i < count($finalGrades) ? $finalGrades[$i] : "") . "</p>";
-                        echo "<p> ". ($i < count($classNames) ? $classNames[$i] : "") . ", is weighed at  ". ($i < count($classWeights) ? $classWeights[$i] : "") . " and had a final grade of ". ($i < count($finalGrades) ? $finalGrades[$i] : "") . ".</p>";
+                        echo "<li><p> " . ($i < count($classNames) ? $classNames[$i] : "") . ", is weighed at  " . ($i < count($classWeights) ? $classWeights[$i] : "") . " and had a final grade of " . ($i < count($finalGrades) ? $finalGrades[$i] : "") . "%.</p></li>";
                     }
+                    echo "</ol>";
                     echo "<h1>Results</h1>";
-                    echo "<p>Final GPA: <strong>" . $finalGPA . "</strong></p>";
-
+                    echo "<p>Thus your final GPA summates to: <strong>" . $finalGPA . "</strong></p>";
                     // Check if there's an Honors class with weight less than 4.5
                     if (checkHonorsClass($classNames, $classWeights)) {
                         echo '<p style="color: red; font-weight: bold;">WARNING: You have a class with "Honors" in the name and a weight less than 4.5.</p>';
@@ -125,7 +130,9 @@
 
                     if (checkAPClass($classNames, $classWeights)) {
                         echo '<p style="color: red; font-weight: bold;">WARNING: You have a class with "AP" or "Advanced Placement" in the name and a weight less than 5.</p>';
-                    }
+
+                
+                                   }
                 }
                 ?>
             </div>

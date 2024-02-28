@@ -7,11 +7,12 @@
 	<div class="container-fluid">
 
 		<head>
+			<title>GPA Calculator</title>
 
 		<body>
 			<div class="topnav">
 				<a href="index.html">About</a>
-				<a class="active" href="Calculator.html">Calculator</a>
+				<a class="active" href="Calculator.php">Calculator</a>
 				<a href="CodeView.html">View Code</a>
 			</div>
 		</body>
